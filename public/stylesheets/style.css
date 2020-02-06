@@ -1,0 +1,12 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #660563;
+}
+
+a {
+  color: #00B7FF;
+}
+.navbar navbar-expand-lg navbar-light blue-grey lighten-5 mb-4{
+  background-color: black !important;
+}
