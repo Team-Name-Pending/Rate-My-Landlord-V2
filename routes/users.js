@@ -10,9 +10,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/register', function(req, res, next){
-    var username = req.body.user_name;
+	var username = req.body.user_name;
+	var test = req.body.user_name.replace(/\s+/g, '');
     var password = req.body.password;
 	var email = req.body.email;
+	//if(validator.isAlphanumeric(test) && validator.isEmail(email))
     // Check if account already exists
     User.findOne({ 'user_name' :  username }, function(err, user)
     {
@@ -48,7 +50,7 @@ router.post('/register', function(req, res, next){
  Creates a JWT
  */
 function createJwt(profile) {
-    return jwt.sign(profile, secret, {
+    return jwt.sign(profile, process.env.secret, {
         expiresIn: '10d'
     });
 }
