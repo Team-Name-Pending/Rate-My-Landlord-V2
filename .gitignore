@@ -3,3 +3,4 @@ node_modules/
 bin/
 package.json
 package-lock.json
+.env
