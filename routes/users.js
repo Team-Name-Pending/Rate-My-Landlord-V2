@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var User = require('../models/users');
 var jwt = require('jsonwebtoken');
+require('dotenv').config();
 var validator = require('validator');
 
 /* GET users listing. */
