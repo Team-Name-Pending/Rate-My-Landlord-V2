@@ -56,7 +56,7 @@ router.post('/login', function(req, res, next){
 			
 		}
 	});
-)};
+});
 
 /*
  Creates a JWT
