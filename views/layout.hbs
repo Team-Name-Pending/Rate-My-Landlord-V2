@@ -10,7 +10,6 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src='/javascripts/examples.js'></script>
     <script src='/javascripts/feed.js'></script>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' />
     <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
     <script src='/javascripts/examples.js'></script>
@@ -31,10 +30,10 @@
 
 
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-light blue-grey lighten-5 mb-4 " style="background-color: blueviolet">
+<nav class="navbar navbar-expand-lg navbar-light blue-grey lighten-5 mb-4 " style="background-color: #a61311">
 
     <!-- Navbar brand -->
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Rate My Landlord</a>
 
     <!-- Collapse button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -59,11 +58,11 @@
             <!-- Dropdown -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                   aria-haspopup="true" aria-expanded="false">Moore</a>
                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="#">About Us</a>
+                    <a class="dropdown-item" href="#">Contact Us</a>
+                    <a class="dropdown-item" href="#"></a>
                 </div>
             </li>
 
@@ -72,7 +71,9 @@
 
         <!-- Search form -->
         <form class="form-inline">
-            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="LocSearch" onsubmit="function locate() {
+              
+            }">
         </form>
     </div>
     <!-- Collapsible content -->
