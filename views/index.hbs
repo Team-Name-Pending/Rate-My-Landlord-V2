@@ -40,9 +40,9 @@
                     searchText = document.getElementById("LocSearch").value;
                     const geocoder = platform.getGeocodingService();
                     geocoder.geocode({searchText}, result => {
-                        const location = result.Response.View[0].Result[0].Location.DisplayPosition;
-                        const {Latitude: lat, Longitude: lng} = location;
-                        const marker = new H.map.Marker({lat, lng});
+                        var location = result.Response.View[0].Result[0].Location.DisplayPosition;
+                        var {Latitude: lat, Longitude: lng} = location;
+                        var marker = new H.map.Marker({lat, lng});
                         map.addObject(marker);
                     });
                 }
