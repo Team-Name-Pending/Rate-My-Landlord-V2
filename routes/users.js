@@ -4,6 +4,7 @@ var User = require('../models/users');
 var jwt = require('jsonwebtoken');
 require('dotenv').config();
 var validator = require('validator');
+var bcrypt = require('bcrypt-nodejs');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -47,6 +48,16 @@ router.post('/register', function(req, res, next){
     });
 });
 
+router.post('/login', function(req, res, next){
+	var username = req.body.user_name;
+	var password = bcrypt.bcrypt.hashSync(body.req.password, bcrypt.genSaltSync(8));
+	User.findOne({ 'user_name' :  username, 'password' : password }, function(err, user){
+		if(user){
+			
+		}
+	});
+)};
+
 /*
  Creates a JWT
  */
@@ -54,6 +65,22 @@ function createJwt(profile) {
     return jwt.sign(profile, process.env.secret, {
         expiresIn: '10d'
     });
+}
+
+//Check to make sure header is not undefined, if so, return Forbidden (403)
+const checkToken = (req, res, next) => {
+    const header = req.headers['authorization'];
+
+    if(typeof header !== 'undefined') {
+        const bearer = header.split(' ');
+        const token = bearer[1];
+
+        req.token = token;
+        next();
+    } else {
+        //If header is undefined return Forbidden (403)
+        res.sendStatus(403);
+    }
 }
 
 module.exports = router;
