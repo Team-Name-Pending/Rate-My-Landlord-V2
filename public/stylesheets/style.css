@@ -1,7 +1,6 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  color: #660563;
 
 }
 
@@ -111,6 +110,7 @@ input::-webkit-input-placeholder {
  font-size: 11px;
  text-align: center;
 }
+
 
 
 
