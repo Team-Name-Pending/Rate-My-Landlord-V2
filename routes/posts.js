@@ -1,7 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var Post = require('../models/post');
-
+var mongoose = require('mongoose');
+var fs = require('fs');
+var multer = require('multer');
+require('./util');
 
 router.post('/addPost', function(req, res, next){
 	var test = req.body.comment.replace(/\s+/g, '');//Remove spaces
@@ -31,3 +34,23 @@ router.delete('/deletePost/:id', function(req, res, next){
 		res.json(post);
 	});	
 });
+
+app.use(multer({ dest: './public/images/',
+ rename: function (fieldname, filename) {
+   return filename;
+ },
+}));
+
+app.use(multer({ dest: './public/images/',
+ rename: function (fieldname, filename) {
+   return filename;
+ },
+}));
+
+app.post('/api/photo',function(req,res){
+ var newItem = new Item();
+ newItem.img.data = fs.readFileSync(req.files.userPhoto.path)
+ newItem.img.contentType = 'image/png';
+ newItem.save();
+});
+
