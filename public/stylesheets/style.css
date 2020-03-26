@@ -1,8 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-     !important background-color: #2d3038;
-
+      background-color: #2d3038 !important;
 }
 
 a {
@@ -111,7 +110,19 @@ input::-webkit-input-placeholder {
  font-size: 11px;
  text-align: center;
 }
+/*footer css*/
+footer{
+  background-color: #6fe864 !important ;
+  width: 100%;
+}
 
+a{
+  color: white !important;
+}
+.footer-copyright{
+  background-color: #46a63d !important;
+  
+}
 
 
 
