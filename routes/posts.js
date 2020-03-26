@@ -42,7 +42,20 @@ router.get('/getPosts', function(req, res, next){
 			if(err)
 				res.send(err);
 			res.json(posts);
+			res.send({"response: House posts were sent!"});
 		});
+	}
+	else if(mode == "user"){
+		var user = req.body.user;
+		Post.find(user:user_name, function(err, posts){
+			if(err)
+				res.send(err);
+			res.json(posts);
+			res.send({"response: User posts were sent!"});
+		});
+	}
+	else{
+		res.json({"response: Invalid mode"});
 	}
 });
 
@@ -71,13 +84,12 @@ app.use(multer({ dest: './public/images/',
 
 app.post('/api/photo',function(req,res){
  var newItem = new Item();
- newItem.img.data = fs.readFileSync(req.files.userPhoto.path)
+ newItem.img.data = fs.readFileSync(req.files.userPhoto.path);
  newItem.img.contentType = 'image/png';
  newItem.save();
 });
 
 function verifyJwt(jwtString) {
-
     var value = jwt.verify(jwtString, process.env.secret);
     return value;
 }
