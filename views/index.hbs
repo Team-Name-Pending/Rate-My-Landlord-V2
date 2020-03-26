@@ -7,6 +7,7 @@
         #map { height: 85vh; width: 50vw;  }
     </style>
 </head>
+
 <table style="width:100%">
     <tr>
         <th style="=width: 50%; vertical-align: top">
@@ -20,7 +21,7 @@
             <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
             <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
             <script>
-                const platform = new H.service.Platform({ apikey: 'WJA1Bm3QWK88PJSmkCjsGUrEDPPwViXwz1Dixj1YEo4' });
+                const platform = new H.service.Platform({ apikey: 'WJA1Bm3QWK88PJSmkCjsGUrEDPPwViXwz1Dixj1YEo4'});
                 const defaultLayers = platform.createDefaultLayers();
                 const map = new H.Map(document.getElementById('map'),
                         defaultLayers.vector.normal.map, {
@@ -40,9 +41,9 @@
                     searchText = document.getElementById("LocSearch").value;
                     const geocoder = platform.getGeocodingService();
                     geocoder.geocode({searchText}, result => {
-                        const location = result.Response.View[0].Result[0].Location.DisplayPosition;
-                        const {Latitude: lat, Longitude: lng} = location;
-                        const marker = new H.map.Marker({lat, lng});
+                        var location = result.Response.View[0].Result[0].Location.DisplayPosition;
+                        var {Latitude: lat, Longitude: lng} = location;
+                        var marker = new H.map.Marker({lat, lng});
                         map.addObject(marker);
                     });
                 }
