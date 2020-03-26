@@ -27,6 +27,8 @@ router.post('/addPost', function(req, res, next){
 			
 			
 		}
+		else
+			res.json({"response: User not logged in"});
 	}
 	catch(err){
 		res.send(err);
@@ -38,7 +40,7 @@ router.get('/getPosts', function(req, res, next){
 	var mode = req.body.mode;
 	if(mode == "house"){
 		var house = req.body.house;
-		Post.find(house:address, function(err, posts){
+		Post.find({address:house}, function(err, posts){
 			if(err)
 				res.send(err);
 			res.json(posts);
@@ -47,7 +49,7 @@ router.get('/getPosts', function(req, res, next){
 	}
 	else if(mode == "user"){
 		var user = req.body.user;
-		Post.find(user:user_name, function(err, posts){
+		Post.find({user_name:user}, function(err, posts){
 			if(err)
 				res.send(err);
 			res.json(posts);
@@ -90,7 +92,15 @@ app.post('/api/photo',function(req,res){
 });
 
 function verifyJwt(jwtString) {
-    var value = jwt.verify(jwtString, process.env.secret);
-    return value;
+	BlackList.findOne({token:jwtString}, function(err, token){
+		if(err)
+			throw err;
+		if(token)
+			return null;
+		else{
+			var value = jwt.verify(jwtString, process.env.secret);
+			return value;
+		}
+	});
 }
 
