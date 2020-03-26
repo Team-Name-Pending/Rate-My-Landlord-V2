@@ -18,7 +18,7 @@ router.post('/register', function(req, res, next){
 	var email = req.body.email;
 	//if(validator.isAlphanumeric(test) && validator.isEmail(email))
     // Check if account already exists
-    User.findOne({ 'user_name' :  username }, function(err, user)
+    User.findOne({ user_name :  username }, function(err, user)
     {
         if (err)
             res.send(err);
@@ -40,7 +40,7 @@ router.post('/register', function(req, res, next){
             newUser.save(function(err, user) {
                 if (err)
                     throw err;
-	     res.cookie('Authorization', 'Bearer ' + user.access_token); 
+				res.cookie('Authorization', 'Bearer ' + user.access_token); 
                 res.json({'success' : 'account created'});
 
             });
@@ -53,7 +53,7 @@ router.post('/login', function(req, res, next){
 	var password = bcrypt.bcrypt.hashSync(body.req.password, bcrypt.genSaltSync(8));
 	User.findOne({ 'user_name' :  username, 'password' : password }, function(err, user){
 		if(user){
-			
+			res.cookie('Authorization', 'Bearer ' + user.access_token);
 		}
 	});
 });

@@ -4,7 +4,7 @@ require('./util');
 
 var postSchema = new Schema({
     user_name: {type: String},
-//	file_name: {type: binData},
+	img: {data: Buffer, contentType: String},
     comment: {type: String},
     date_created : {type: Date, default: new Date()},
 	rating : {type: Number},
