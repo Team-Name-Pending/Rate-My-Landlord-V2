@@ -1,7 +1,7 @@
 body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  color: #660563;
+      background-color: #2d3038 !important;
 }
 
 a {
@@ -10,3 +10,119 @@ a {
 .navbar navbar-expand-lg navbar-light blue-grey lighten-5 mb-4{
   background-color: black !important;
 }
+/*login page css*/
+
+.user_card {
+  height: 400px;
+  width: 350px;
+  margin-top: auto;
+  margin-bottom: auto;
+  background: #6fe864;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
+
+}
+.form_container {
+  margin-top: 100px;
+}
+.login_btn {
+  width: 100%;
+  background:  #46a63d !important;
+  color: white !important;
+}
+.login_btn:focus {
+  box-shadow: none !important;
+  outline: 0px !important;
+}
+.login_container {
+  padding: 0 2rem;
+}
+.input-group-text {
+  background:  #46a63d !important;
+  color: white !important;
+  border: 0 !important;
+  border-radius: 0.25rem 0 0 0.25rem !important;
+}
+
+.input_user,
+		.input_pass:focus {
+			box-shadow: none !important;
+			outline: 0px !important;
+		}
+		.custom-checkbox .custom-control-input:checked~.custom-control-label::before {
+			background-color:  #46a63d !important;
+		}
+
+
+/*register page css*/
+hr{
+ width: 10%;
+ color: #ffffff;
+}
+
+.form-group{
+ margin-bottom: 15px;
+}
+
+label{
+ margin-bottom: 15px;
+}
+
+input,
+input::-webkit-input-placeholder {
+   font-size: 11px;
+   padding-top: 3px;
+}
+
+.main-login{
+  background-color: #6fe864;
+   /* shadows and rounded borders */
+   -moz-border-radius: 2px;
+   -webkit-border-radius: 2px;
+   border-radius: 2px;
+   -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+   -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+
+}
+
+.main-center{
+  margin-top: 30px;
+  margin: 0 auto;
+  max-width: 330px;
+   padding: 40px 40px;
+
+}
+
+.login-button{
+ margin-top: 5px;
+ background-color: #46a63d !important;
+}
+
+.login-register{
+ font-size: 11px;
+ text-align: center;
+}
+/*footer css*/
+footer{
+  background-color: #6fe864 !important ;
+  width: 100%;
+}
+
+a{
+  color: white !important;
+}
+.footer-copyright{
+  background-color: #46a63d !important;
+  
+}
+
+
+

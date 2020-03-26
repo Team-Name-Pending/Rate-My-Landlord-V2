@@ -1,1 +1,57 @@
+<html>
+<head>
+    <title>Simple HERE Map</title>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <style>
+        html, body { border: 0; margin: 0; padding: 0; }
+        #map { height: 85vh; width: 50vw;  }
+    </style>
+</head>
 
+<table style="width:100%">
+    <tr>
+        <th style="=width: 50%; vertical-align: top">
+            <h4>Most recent Reviews </h4>
+
+        </th>
+        <th style="width: 50%">
+            <div id="map"></div>
+            <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+            <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+            <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+            <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+            <script>
+                const platform = new H.service.Platform({ apikey: 'WJA1Bm3QWK88PJSmkCjsGUrEDPPwViXwz1Dixj1YEo4'});
+                const defaultLayers = platform.createDefaultLayers();
+                const map = new H.Map(document.getElementById('map'),
+                        defaultLayers.vector.normal.map, {
+                            center: { lat: 53.27512, lng: -9.05707 },
+                            zoom: 13,
+                            pixelRatio: window.devicePixelRatio || 1
+                        });
+                window.addEventListener('resize', () => map.getViewPort().resize());
+                const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+                const ui = H.ui.UI.createDefault(map, defaultLayers);
+
+                //Begin geocoding
+                function locate() {
+
+
+                    var searchText = '';
+                    searchText = document.getElementById("LocSearch").value;
+                    const geocoder = platform.getGeocodingService();
+                    geocoder.geocode({searchText}, result => {
+                        var location = result.Response.View[0].Result[0].Location.DisplayPosition;
+                        var {Latitude: lat, Longitude: lng} = location;
+                        var marker = new H.map.Marker({lat, lng});
+                        map.addObject(marker);
+                    });
+                }
+            </script></th>
+    </tr>
+
+</table>
+
+
+
+</html>

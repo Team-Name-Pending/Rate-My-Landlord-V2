@@ -10,7 +10,6 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src='/javascripts/examples.js'></script>
     <script src='/javascripts/feed.js'></script>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
     <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css' />
     <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
     <script src='/javascripts/examples.js'></script>
@@ -25,16 +24,16 @@
 
 
 </head>
-<body>
+<body  class="p-3 mb-2 bg-secondary text-white">
 
 
 
 
 <!--Navbar-->
-<nav class="navbar navbar-expand-lg navbar-light blue-grey lighten-5 mb-4 " style="background-color: blueviolet">
+<nav class="navbar navbar-expand-lg navbar-light blue-grey lighten-5 mb-4 " style="background-color: #46a63d">
 
     <!-- Navbar brand -->
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">Rate My Landlord</a>
 
     <!-- Collapse button -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -47,7 +46,7 @@
         <!-- Links -->
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="http://danu7.it.nuigalway.ie:8645/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href=/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/register">register</a>
@@ -57,22 +56,16 @@
             </li>
 
             <!-- Dropdown -->
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">Dropdown</a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
+
 
         </ul>
         <!-- Links -->
 
         <!-- Search form -->
         <form class="form-inline">
-            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+            <input class="form-control" type="text" placeholder="Search" aria-label="Search" id="LocSearch" onsubmit="function locate() {
+              
+            }">
         </form>
     </div>
     <!-- Collapsible content -->
@@ -82,6 +75,57 @@
 
 
 {{{body}}}
+<!-- Footer -->
+<footer id="footer" class="page-footer font-small teal pt-4">
+
+  <!-- Footer Text -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mt-md-0 mt-3">
+
+        <!-- Content -->
+        <h5 class="text-uppercase font-weight-bold">About Us</h5>
+        <p>This website is designed to help students to find realible accommodation for the academic year. How this website works, if you 
+          have been recently living in a bad accommodation spot and you are not happy with the property or landlord send in a picture and address of the place you 
+          were staying at and comment what was wrong with the property or landlord, to help other students out.
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-6 mb-md-0 mb-3">
+
+        <!-- Content -->
+        <h5 class="text-uppercase font-weight-bold">Contact Us</h5>
+        <p>Connect with with us on Linkedin:<br>
+        <a  href="https://www.linkedin.com/in/m%C3%A1irt%C3%ADn-%C3%B3-flatharta-842a54178/">Máirtín Ó Flatharta</a><br>
+        <a href="https://www.linkedin.com/in/ivans-tisins-52123a17a/">Ivans Tisins</a><br>
+          <a href="https://www.linkedin.com/in/dylan-oxley-8a8b70b3/">Dylan Oxley</a><br>
+          <a href="https://www.linkedin.com/in/tadhg-codyre-2501/">Tadhg Codyre</a>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Text -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">Rate-My-Landlord</div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
 </body>
 
 </html>
