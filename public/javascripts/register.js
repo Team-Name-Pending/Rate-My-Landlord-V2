@@ -11,7 +11,7 @@ $(document).ready(
                 url: '/users/register/',
                 type: 'POST',
                 data: {user_name:$('#registerUsername').val(), email:$('#Registeremail').val(), password:$('#Registerpassword').val()},
-                success: function (data) {
+                success: function (token) {
                     $(location).attr('href', '/login');
                 }
             });

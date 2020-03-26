@@ -70,7 +70,7 @@ router.delete('/deletePost/:id', function(req, res, next){
 	});	
 });
 
-router.get('/getHouses/, fuction(req, res, next){
+router.get('/getHouses/', fuction(req, res, next){
 	Post.find().distinct('address', function(err, ids){
 		if(err)
 			res.send(err);

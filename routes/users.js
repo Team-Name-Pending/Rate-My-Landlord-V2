@@ -53,7 +53,7 @@ router.post('/login', function(req, res, next){
 	var password = bcrypt.bcrypt.hashSync(body.req.password, bcrypt.genSaltSync(8));
 	User.findOne({ 'user_name' :  username, 'password' : password }, function(err, user){
 		if(user){
-			
+			res.cookie('Authorization', 'Bearer ' + user.access_token);
 		}
 	});
 });
