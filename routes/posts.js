@@ -74,6 +74,9 @@ router.get('/getHouses/', fuction(req, res, next){
 	Post.find().distinct('address', function(err, ids){
 		if(err)
 			res.send(err);
+		else{
+			res.send(ids);
+		}
 		
 	});
 });
