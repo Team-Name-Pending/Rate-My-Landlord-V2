@@ -8,6 +8,7 @@ var usersSchema = new Schema({
 	email: {type: String},
 	user_name: {type: String},
 	password: String,
+	salt: String,
 	access_token: String
 });
 

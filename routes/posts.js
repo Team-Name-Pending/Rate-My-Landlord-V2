@@ -6,6 +6,10 @@ var fs = require('fs');
 var multer = require('multer');
 require('./util');
 
+router.get('/', function(req, res, next) {
+  res.send('respond with a resource');
+});
+
 router.post('/addPost', function(req, res, next){
 	var test = req.body.comment.replace(/\s+/g, '');//Remove spaces
 	var test2 = req.body.address.replace(/\s+/g, '');
@@ -70,7 +74,7 @@ router.delete('/deletePost/:id', function(req, res, next){
 	});	
 });
 
-router.get('/getHouses/', fuction(req, res, next){
+router.get('/getHouses', fuction(req, res, next){
 	Post.find().distinct('address', function(err, ids){
 		if(err)
 			res.send(err);
@@ -81,7 +85,7 @@ router.get('/getHouses/', fuction(req, res, next){
 	});
 });
 
-app.use(multer({ dest: './public/images/',
+app.use(multer({ dest: './public/images',
  rename: function (fieldname, filename) {
    return filename;
  },
