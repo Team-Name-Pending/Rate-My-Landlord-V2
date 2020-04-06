@@ -7,21 +7,29 @@
 
 <body>
     {{body}}
-        <form>
+<form >
+  <div id = "reviewSection">
   <div class="form-group">
-    <label for="Address">Adress</label>
-    <input type="address" class="form-control" id="address" aria-describedby="addressHelp" placeholder="Address">
+    <label for="Address">Address</label>
+    <input type="address" class="form-control" id="address" placeholder="Address">
   </div>
   <div class="form-group">
-    <label for="review">Review</label>
-    <input type="review" class="form-control" id="review" placeholder="write a review">
+    <label for="rating">Rating</label>
+    <select class="form-control" id="Rating">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select>
   </div>
+
   <div class="form-group">
-    <label for="review">Rating 1-5</label>
-    <input type="Rating" class="form-control" id="rating" placeholder="Provide a Rating">
+    <label for="Review">Review</label>
+    <textarea class="form-control" id="review" rows="3"></textarea>
   </div>
- 
-  <button  id="submitButton" type="submit" class="btn btn-primary">Submit</button>
+   <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
 </form>
     </body>
 </html>
