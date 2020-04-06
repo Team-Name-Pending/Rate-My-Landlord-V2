@@ -57,7 +57,7 @@ router.post('/login', function(req, res, next){
 						BlackList.remove({token : user.access_token});
 						res.cookie('Authorization', user.access_token);
 					}
-				}
+				});
 				res.cookie('Authorization', user.access_token);
 			}
 			else{
@@ -73,7 +73,7 @@ router.post('/login', function(req, res, next){
 router.post('/logout', function(req, res, next){
 	BlackList.findOne({token : req.body.token}, function(err, token){
 		if(token){
-			res.json({'result' : 'user is already logged out');
+			res.json({'result' : 'user is already logged out'});
 		}
 		else{
 			var logged_out = new BlackList();
