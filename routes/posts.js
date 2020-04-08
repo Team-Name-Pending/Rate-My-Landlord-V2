@@ -16,13 +16,13 @@ router.get('/', function(req, res, next) {
 
 router.post('/addPost', function(req, res, next){
 	var test = req.body.comment.replace(/\s+/g, '');//Remove spaces
-	var test2 = req.body.address.replace(/\s+/g, '');
+	//var test2 = req.body.address.replace(/\s+/g, '');
 	var post = new Post();
 	const cookie = req.cookies['Authorization'];
 	User.findOne({access_token : cookie}, function(err, user){
 	if(user){
 		post.user_name = user.user_name;
-		if(validator.isAlphanumeric(test) && validator.isAlphanumeric(test2)){
+		if(validator.isAlphanumeric(test)/* && validator.isAlphanumeric(test2)*/){
 			post.address = req.body.address;
 			post.comment = req.body.comment;
 			post.rating = req.body.rating;
@@ -75,6 +75,15 @@ router.get('/getPosts', function(req, res, next){
 	else{
 		res.json({"response": "Invalid mode "+mode});
 	}
+});
+
+router.get('/getRecentPosts', function(req, res, next){
+	Post.find({}, function(err, posts){
+			if(err){
+				res.send(err);
+			}
+			else res.json(posts);
+		}).sort({date_created: -1});
 });
 
 router.delete('/deletePost/:id', function(req, res, next){

@@ -38,11 +38,11 @@
                 const ui = H.ui.UI.createDefault(map, defaultLayers);
 
                 //Begin geocoding
-                function locate() {
+                function locate(search) {
 
 
-                    var searchText = '';
-                    searchText = document.getElementById("LocSearch").value;
+                    var searchText = search;
+                    //searchText = document.getElementById("LocSearch").value;
                     const geocoder = platform.getGeocodingService();
                     geocoder.geocode({searchText}, result => {
                         var location = result.Response.View[0].Result[0].Location.DisplayPosition;

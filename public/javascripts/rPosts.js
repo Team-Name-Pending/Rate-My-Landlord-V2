@@ -2,10 +2,8 @@ $(document).ready(
     function() {  
 			const mode = "most_recent";
             $.ajax({
-                url: '/posts/getPosts/',
+                url: '/posts/getRecentPosts/',
                 type: 'GET',
-                dataType: 'json',
-				data: {'mode' : mode},
                 success: function (data) {
                     console.log(data)
 					var posts = "";
@@ -18,5 +16,20 @@ $(document).ready(
                     }
                     $("#recentPosts").html(posts);
                 }
-            });     
+            }); 
+			$.ajax({
+                url: '/posts/getHouses',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data)
+					var posts = "";
+                    for (var i = 0; i < data.length; i++) 
+					{
+                        locate(data[i]);
+                    }
+                    $("#recentPosts").html(posts);
+                }
+            });	
+				
         });
