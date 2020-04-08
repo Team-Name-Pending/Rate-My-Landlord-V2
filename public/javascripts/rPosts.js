@@ -1,11 +1,11 @@
 $(document).ready(
-    function() {
-        var totalCharacters = 280;        
+    function() {  
+			const mode = "most_recent";
             $.ajax({
-                url: '/posts/getPosts',
+                url: '/posts/getPosts/',
                 type: 'GET',
-                mode:"most recent",
                 dataType: 'json',
+				data: {'mode' : mode},
                 success: function (data) {
                     console.log(data)
 					var posts = "";

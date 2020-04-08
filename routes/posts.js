@@ -46,7 +46,7 @@ router.post('/addPost', function(req, res, next){
 
 router.get('/getPosts', function(req, res, next){
 	var mode = req.body.mode;
-	if(mode == "house"){
+	if(mode == "user"){
 		var house = req.body.house;
 		Post.find({address:house}, function(err, posts){
 			if(err)
@@ -55,7 +55,7 @@ router.get('/getPosts', function(req, res, next){
 			//res.json({"response" : "House posts were sent!"});
 		});
 	}
-	else if(mode == "user"){
+	else if(mode == "house"){
 		var user = req.body.user;
 		Post.find({user_name:user}, function(err, posts){
 			if(err)
@@ -64,7 +64,7 @@ router.get('/getPosts', function(req, res, next){
 			//res.json({"response": "User posts were sent!"});
 		});
 	}
-	else if(mode == "most recent"){
+	else if(mode == "most_recent"){
 		Post.find({}, function(err, posts){
 			if(err){
 				res.send(err);
@@ -73,7 +73,7 @@ router.get('/getPosts', function(req, res, next){
 		}).sort({date_created: -1});
 	}
 	else{
-		res.json({"response": "Invalid mode"});
+		res.json({"response": "Invalid mode "+mode});
 	}
 });
 
