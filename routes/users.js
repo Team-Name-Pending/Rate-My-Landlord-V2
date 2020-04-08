@@ -6,6 +6,8 @@ var jwt = require('jsonwebtoken');
 require('dotenv').config();
 var validator = require('validator');
 var bcrypt = require('bcrypt-nodejs');
+var cookies = require('cookie-parser');
+var c = require('js-cookie');
 
 router.post('/register', function(req, res, next){
 	var username = req.body.user_name;
@@ -52,42 +54,66 @@ router.post('/login', function(req, res, next){
 		if(user){
 			password = bcrypt.hashSync(password, user.salt);
 			if(password.localeCompare(user.password) == 0){
-				BlackList.findOne({ token : user.access_token }, function(err, token){
+				BlackList.findOne({ token : user.access_token}, function(err, token){
 					if(token){
-						BlackList.remove({token : user.access_token});
+						BlackList.remove({token : user.access_token}, true, function(err){
+							if (err){
+								res.send(err);
+							}
+						});
+						//res.send({'result' : 'user was logged in'});
 						res.cookie('Authorization', user.access_token);
+						return;
+					}
+					else{
+						res.json({"result":"selected user is already signed in"});
+						return;
 					}
 				});
-				res.cookie('Authorization', user.access_token);
+				//res.cookie('Authorization', user.access_token);
 			}
 			else{
 				res.json({"result" : "Incorrect password"});
+				return;
 			}
 		}
 		else{
 			res.json({"result" : "Account with that username not found!"});
+			return;
 		}
 	});
 });
 
 router.post('/logout', function(req, res, next){
-	BlackList.findOne({token : req.body.token}, function(err, token){
-		if(token){
-			res.json({'result' : 'user is already logged out'});
-		}
-		else{
-			var logged_out = new BlackList();
-			logged_out.token = req.body.token;
-			logged_out.save(function(err, tok){
-				if (err){
-					res.send(err);
-				}
-				else{
-					res.json({'result' : 'user logged out'});
-				}
-			});
-		}
-	});
+	const cookie = req.cookies['Authorization'];
+	if(typeof cookie !== 'undefined'){
+		BlackList.findOne({token : cookie}, function(err, token){
+			if(token){
+				res.json({'result' : 'user is already logged out'});
+				return;
+			}
+			else{
+				var logged_out = new BlackList();
+				logged_out.token = cookie;
+				logged_out.save(function(err, tok){
+					if (err){
+						res.send(err);
+						return;
+					}
+					else{
+						//TO DO: Find a way of clearing the cookie from browser
+						c.set('Authorization', {expires: Date.now()});
+						return;
+						//res.json({'result' : 'user logged out'});
+					}
+				});
+			}
+		});
+	}
+	else{
+		res.sendStatus(403);
+		return;
+	}
 });
 
 /*
@@ -101,7 +127,7 @@ function createJwt(profile) {
 
 //Check to make sure header is not undefined, if so, return Forbidden (403)
 const checkToken = (req, res, next) => {
-    const header = req.headers['authorization'];
+    const header = req.headers['Authorization'];
 
     if(typeof header !== 'undefined') {
         const bearer = header.split(' ');
