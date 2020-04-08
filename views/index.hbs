@@ -2,6 +2,7 @@
 <head>
     <title>Simple HERE Map</title>
     <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+    <script src="javascripts/rPosts.js"></script>
     <style>
         html, body { border: 0; margin: 0; padding: 0; }
         #map { height: 85vh; width: 50vw;  }
@@ -23,7 +24,7 @@
             <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
             <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
             <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
-            <script src="javascripts/rPosts.js">
+            <script>
                 const platform = new H.service.Platform({ apikey: 'WJA1Bm3QWK88PJSmkCjsGUrEDPPwViXwz1Dixj1YEo4'});
                 const defaultLayers = platform.createDefaultLayers();
                 const map = new H.Map(document.getElementById('map'),
