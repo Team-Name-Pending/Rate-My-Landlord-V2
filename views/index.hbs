@@ -12,6 +12,8 @@
     <tr>
         <th style="=width: 50%; vertical-align: top">
             <h4>Most recent Reviews </h4>
+            <div id="recentPosts">
+            </div>
           
             
         </th>
@@ -21,7 +23,7 @@
             <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
             <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
             <script src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
-            <script>
+            <script src="javascripts/rPosts.js">
                 const platform = new H.service.Platform({ apikey: 'WJA1Bm3QWK88PJSmkCjsGUrEDPPwViXwz1Dixj1YEo4'});
                 const defaultLayers = platform.createDefaultLayers();
                 const map = new H.Map(document.getElementById('map'),
