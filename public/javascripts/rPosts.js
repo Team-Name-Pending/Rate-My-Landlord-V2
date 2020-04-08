@@ -14,7 +14,7 @@ $(document).ready(
                             + "<div class='col-md-9'>"+data[i].user_name+"<br>"+data[i].comment+"<br> "+data[i].rating+"</div>" + "<div class='col-md-3'>"+
                             "</div></div></div></div>";
                     }
-                    $("#recentPosts").html("<div>Eppic gamer</div>");
+                    $("#recentPosts").html(posts);
                 }
             }); 
 			$.ajax({
