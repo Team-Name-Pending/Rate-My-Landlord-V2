@@ -102,7 +102,7 @@ router.post('/logout', function(req, res, next){
 					}
 					else{
 						//TO DO: Find a way of clearing the cookie from browser
-						c.set('Authorization', {expires: Date.now()});
+						res.clearCookie(Authorization, {path:'/'});
 						return;
 						//res.json({'result' : 'user logged out'});
 					}
