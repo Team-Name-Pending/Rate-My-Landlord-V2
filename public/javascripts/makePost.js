@@ -1,6 +1,6 @@
 $(document).ready(
 	function() {
-		$("#log-form").submit(function (event) {
+		$("#postSubmit").submit(function (event) {
             event.preventDefault();
             $.ajax({
                 type: 'POST',
