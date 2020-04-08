@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var Post = require('../models/post');
 require('dotenv').config();
 
 

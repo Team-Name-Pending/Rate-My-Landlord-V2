@@ -1,7 +1,7 @@
 $(document).ready(
     function() {
         //Event handler when user attemps to register
-        $("#registerbutton").click(function (event) {
+        $("#loginbutton").click(function (event) {
             console.log("I've been called");
             $.ajax({
                 url: '/users/login/',

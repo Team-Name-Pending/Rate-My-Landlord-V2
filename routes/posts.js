@@ -1,38 +1,46 @@
 var express = require('express');
 var router = express.Router();
 var Post = require('../models/post');
+var User = require('../models/users');
 var mongoose = require('mongoose');
-var fs = require('fs');
-var multer = require('multer');
-require('./util');
+var jwt = require('jsonwebtoken');
+var validator = require('validator');
+//var fs = require('fs');
+require('dotenv').config();
+//var multer = require('multer');
+//require('./util');
+
+router.get('/', function(req, res, next) {
+  res.send('respond with a resource');
+});
 
 router.post('/addPost', function(req, res, next){
 	var test = req.body.comment.replace(/\s+/g, '');//Remove spaces
 	var test2 = req.body.address.replace(/\s+/g, '');
-	post = new Post(req.body);
-	try{
-		var jwtString = req.cookies.Authorization.split(" ");
-        var profile = verifyJwt(jwtString[1]);
-		if(profile){
-			if(validator.isAlphanumeric(test) && validator.isAlphanumeric(test2)){
-				post.save(function(err, savedPost){
-					if(err)
-						throw err;
-				});
-		
+	var post = new Post();
+	const cookie = req.cookies['Authorization'];
+	User.findOne({access_token : cookie}, function(err, user){
+	if(user){
+		post.user_name = user.user_name;
+		if(validator.isAlphanumeric(test) && validator.isAlphanumeric(test2)){
+			post.address = req.body.address;
+			post.comment = req.body.comment;
+			post.rating = req.body.rating;
+			post.image = "nothing";
+			post.save(function(err, savedPost){
+			if(err)
+				res.json({"result" : "something went wrong"});
+			else 
 				res.json({"response": "Post was saved"});
-			
-			}
-			res.json({"response": "Invalid chars were used"});
-			
-			
+			});
+	
+		
 		}
-		else
-			res.json({"response: User not logged in"});
+		else res.json({"response": "Invalid chars were used"});
+		
 	}
-	catch(err){
-		res.send(err);
-	}
+	else res.json({"response": "User not logged in"});
+	});
 	
 });
 
@@ -44,7 +52,7 @@ router.get('/getPosts', function(req, res, next){
 			if(err)
 				res.send(err);
 			res.json(posts);
-			res.send({"response: House posts were sent!"});
+			//res.json({"response" : "House posts were sent!"});
 		});
 	}
 	else if(mode == "user"){
@@ -53,11 +61,19 @@ router.get('/getPosts', function(req, res, next){
 			if(err)
 				res.send(err);
 			res.json(posts);
-			res.send({"response: User posts were sent!"});
+			//res.json({"response": "User posts were sent!"});
 		});
 	}
+	else if(mode == "most recent"){
+		Post.find({}, function(err, posts){
+			if(err){
+				res.send(err);
+			}
+			else res.json(posts);
+		}).sort({date_created: -1});
+	}
 	else{
-		res.json({"response: Invalid mode"});
+		res.json({"response": "Invalid mode"});
 	}
 });
 
@@ -70,7 +86,7 @@ router.delete('/deletePost/:id', function(req, res, next){
 	});	
 });
 
-router.get('/getHouses/', fuction(req, res, next){
+router.get('/getHouses', function(req, res, next){
 	Post.find().distinct('address', function(err, ids){
 		if(err)
 			res.send(err);
@@ -81,20 +97,21 @@ router.get('/getHouses/', fuction(req, res, next){
 	});
 });
 
-app.use(multer({ dest: './public/images/',
+/*app.use(multer({ dest: './public/images',
  rename: function (fieldname, filename) {
    return filename;
  },
-}));
+}));*/
 
-app.post('/api/photo',function(req,res){
+/*app.post('/api/photo',function(req,res){
  var newItem = new Item();
  newItem.img.data = fs.readFileSync(req.files.userPhoto.path);
  newItem.img.contentType = 'image/png';
  newItem.save();
-});
+});*/
 
 function verifyJwt(jwtString) {
+	res.send("got here");
 	BlackList.findOne({token:jwtString}, function(err, token){
 		if(err)
 			throw err;
@@ -107,3 +124,4 @@ function verifyJwt(jwtString) {
 	});
 }
 
+module.exports = router;

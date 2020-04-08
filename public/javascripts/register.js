@@ -12,7 +12,7 @@ $(document).ready(
                 type: 'POST',
                 data: {user_name:$('#registerUsername').val(), email:$('#Registeremail').val(), password:$('#Registerpassword').val()},
                 success: function (token) {
-                    $(location).attr('href', '/');
+                    $(location).attr('href', '/login');
                 }
             });
 			}
