@@ -46,7 +46,7 @@ router.post('/addPost', function(req, res, next){
 //GET all reviews for a certain address or all reviews made by a certain user
 router.get('/getPosts', function(req, res, next){
 	var mode = req.body.mode;
-	if(mode == "user"){
+	if(mode == "house"){
 		var house = req.body.house;
 		Post.find({address:house}, function(err, posts){
 			if(err)
@@ -54,7 +54,7 @@ router.get('/getPosts', function(req, res, next){
 			res.json(posts);
 		});
 	}
-	else if(mode == "house"){
+	else if(mode == "user"){
 		var user = req.body.user;
 		Post.find({user_name:user}, function(err, posts){
 			if(err)
