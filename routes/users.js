@@ -10,10 +10,10 @@ var cookies = require('cookie-parser');
 var c = require('js-cookie');
 
 router.post('/register', function(req, res, next){
-	var username = req.body.user_name;
-	var test = req.body.user_name.replace(/\s+/g, '');
+    var username = req.body.user_name;
+    var test = req.body.user_name.replace(/\s+/g, '');
     var password = req.body.password;
-	var email = req.body.email;
+    var email = req.body.email;
 	//if(validator.isAlphanumeric(test) && validator.isEmail(email))
     // Check if account already exists
     User.findOne({ user_name :  username }, function(err, user)
@@ -32,14 +32,14 @@ router.post('/register', function(req, res, next){
 
             // set the user's local credentials
             newUser.user_name = username;
-			newUser.salt = bcrypt.genSaltSync(8);
+	    newUser.salt = bcrypt.genSaltSync(8);
             newUser.password = bcrypt.hashSync(password, newUser.salt);
-			newUser.email = email;
+       	    newUser.email = email;
             newUser.access_token = createJwt({user_name:username});
             newUser.save(function(err, user) {
                 if (err)
                     res.send(err);
-				res.cookie('Authorization', user.access_token); 
+		res.cookie('Authorization', user.access_token); 
                 res.json({'success' : 'account created'});
 
             });
@@ -61,7 +61,7 @@ router.post('/login', function(req, res, next){
 								res.send(err);
 							}
 						});
-						//res.send({'result' : 'user was logged in'});
+						//user is noew logged in
 						res.cookie('Authorization', user.access_token);
 						return;
 					}
@@ -70,7 +70,6 @@ router.post('/login', function(req, res, next){
 						return;
 					}
 				});
-				//res.cookie('Authorization', user.access_token);
 			}
 			else{
 				res.json({"result" : "Incorrect password"});
@@ -93,6 +92,7 @@ router.post('/logout', function(req, res, next){
 				return;
 			}
 			else{
+				//add jwt to a blacklist to ensure it cannot be used without the user being logged in
 				var logged_out = new BlackList();
 				logged_out.token = cookie;
 				logged_out.save(function(err, tok){
@@ -101,10 +101,9 @@ router.post('/logout', function(req, res, next){
 						return;
 					}
 					else{
-						//TO DO: Find a way of clearing the cookie from browser
+						//remove auth cookie from user's browser
 						res.clearCookie(Authorization, {path:'/'});
 						return;
-						//res.json({'result' : 'user logged out'});
 					}
 				});
 			}
