@@ -16,13 +16,12 @@ router.get('/', function(req, res, next) {
 
 router.post('/addPost', function(req, res, next){
 	var test = req.body.comment.replace(/\s+/g, '');//Remove spaces
-	//var test2 = req.body.address.replace(/\s+/g, '');
 	var post = new Post();
 	const cookie = req.cookies['Authorization'];
 	User.findOne({access_token : cookie}, function(err, user){
 	if(user){
 		post.user_name = user.user_name;
-		if(validator.isAlphanumeric(test)/* && validator.isAlphanumeric(test2)*/){
+		if(validator.isAlphanumeric(test)){
 			post.address = req.body.address;
 			post.comment = req.body.comment;
 			post.rating = req.body.rating;
@@ -44,6 +43,7 @@ router.post('/addPost', function(req, res, next){
 	
 });
 
+//GET all reviews for a certain address or all reviews made by a certain user
 router.get('/getPosts', function(req, res, next){
 	var mode = req.body.mode;
 	if(mode == "user"){
@@ -52,7 +52,6 @@ router.get('/getPosts', function(req, res, next){
 			if(err)
 				res.send(err);
 			res.json(posts);
-			//res.json({"response" : "House posts were sent!"});
 		});
 	}
 	else if(mode == "house"){
@@ -61,22 +60,14 @@ router.get('/getPosts', function(req, res, next){
 			if(err)
 				res.send(err);
 			res.json(posts);
-			//res.json({"response": "User posts were sent!"});
 		});
-	}
-	else if(mode == "most_recent"){
-		Post.find({}, function(err, posts){
-			if(err){
-				res.send(err);
-			}
-			else res.json(posts);
-		}).sort({date_created: -1});
 	}
 	else{
 		res.json({"response": "Invalid mode "+mode});
 	}
 });
 
+//Sorts all reviews starting from the newest
 router.get('/getRecentPosts', function(req, res, next){
 	Post.find({}, function(err, posts){
 			if(err){
@@ -95,6 +86,7 @@ router.delete('/deletePost/:id', function(req, res, next){
 	});	
 });
 
+//GETs list of all reviewed addresses
 router.get('/getHouses', function(req, res, next){
 	Post.find().distinct('address', function(err, ids){
 		if(err)
@@ -106,6 +98,7 @@ router.get('/getHouses', function(req, res, next){
 	});
 });
 
+//These were going to be used to store uploaded images of houses, but that feature couldn't be implemented in time
 /*app.use(multer({ dest: './public/images',
  rename: function (fieldname, filename) {
    return filename;
@@ -120,7 +113,6 @@ router.get('/getHouses', function(req, res, next){
 });*/
 
 function verifyJwt(jwtString) {
-	res.send("got here");
 	BlackList.findOne({token:jwtString}, function(err, token){
 		if(err)
 			throw err;
